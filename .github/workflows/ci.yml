@@ -54,7 +54,12 @@ jobs:
     
     - name: Test Docker Compose
       run: |
-        docker-compose config
+        # Verificar si docker-compose existe, sino usar docker compose
+        if command -v docker-compose &> /dev/null; then
+          docker-compose config
+        else
+          docker compose config
+        fi
         echo "✅ Docker Compose configuración válida"
     
     - name: Notificación de éxito
